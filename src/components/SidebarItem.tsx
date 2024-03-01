@@ -25,7 +25,6 @@ export const SidebarItem = ({ icon, path, title }:Props) => {
           hover:bg-gradient-to-r hover:bg-sky-500 hover:text-white
           ${path === pathName ? 'text-white bg-gradient-to-r from-sky-600 to-cyan-400':''} 
           `}
-         
       >
         { icon }
         <span className="group-hover:text-white-700">{title}</span>
