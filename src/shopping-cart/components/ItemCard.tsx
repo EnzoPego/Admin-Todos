@@ -5,9 +5,10 @@ import type { Product } from "@/products/data/products";
 import Image from "next/image";
 
 import { IoAddCircleOutline, IoRemove } from "react-icons/io5";
-import {  } from "../actions/actions";
+
 
 import { useRouter } from "next/navigation";
+import { removeSingleItemFromCart, addProductToCart } from '../actions/actions';
 
 interface Props {
   product:  Product;
@@ -20,12 +21,12 @@ export const ItemCard = ({ product, quantity }: Props) => {
   const router = useRouter();
 
   function onAddToCart() {
-    //TODO: addProductToCart(product.id);
+    addProductToCart(product.id);
     router.refresh();
   }
 
   function onRemoveItem() {
-    //TODO: removeSingleItemFromCart(product.id);
+    removeSingleItemFromCart(product.id);
     router.refresh();
   }
 
@@ -33,13 +34,13 @@ export const ItemCard = ({ product, quantity }: Props) => {
     <div className="flex items-center shadow rounded-lg w-full bg-gray-800 border-gray-100">
       
       {/* Product Image */}
-      <div className="p-2">
+      <div className="p-2 w-full sm:w-auto">
         <Image
-            width={200}
-            height={200}
-            className="rounded" 
-            src={ product.image }
-            alt={ product.name } />
+          width={200}
+          height={200}
+          className="rounded" 
+          src={ product.image }
+          alt={ product.name } />
       </div>
       
       {/* Title */}
@@ -60,10 +61,7 @@ export const ItemCard = ({ product, quantity }: Props) => {
             Total: ${ (product.price * quantity).toFixed(2) }
           </span>
           
-
-
         </div>
-
 
       </div>
 

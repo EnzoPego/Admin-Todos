@@ -9,8 +9,9 @@ cookie: cart {
 */
 
 import { getCookie, hasCookie, setCookie } from "cookies-next"
-import { cookies } from "next/headers"
 
+
+// Obtiene el contenido del carrito desde las cookies
 export const getCookieCart =():{ [id:string]: number } => {
 
     if ( hasCookie ('cart') ) {
@@ -21,9 +22,7 @@ export const getCookieCart =():{ [id:string]: number } => {
     return{}
 }
 
-
-
-
+// Agrega un producto al carrito
 export const addProductToCart = (id: string) => {
 
     const cookieCart = getCookieCart()
@@ -38,7 +37,7 @@ export const addProductToCart = (id: string) => {
 }
 
 
-
+// Elimina un producto específico del carrito
 export const removeProuductFromCart = (id:string) =>{
     
     const cookieCart = getCookieCart()
@@ -46,7 +45,19 @@ export const removeProuductFromCart = (id:string) =>{
     if( cookieCart[id] ){
         delete cookieCart[id]
     }
-    
     setCookie('cart', JSON.stringify(cookieCart))
+}
+
+
+// Reduce la cantidad de un producto en el carrito
+export const removeSingleItemFromCart = ( id: string ) => {
     
+    const cookieCart = getCookieCart()
+    
+    if (cookieCart[id] >=2 ){
+        cookieCart[id] -= 1
+    }else{
+        delete cookieCart[id]
+    }
+    setCookie('cart', JSON.stringify(cookieCart))
 }
